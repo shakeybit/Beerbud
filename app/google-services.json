@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "800940418220",
+    "project_id": "beerbud-ca341",
+    "storage_bucket": "beerbud-ca341.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800940418220:android:27a6a261dd8cdc7be3ab09",
+        "android_client_info": {
+          "package_name": "com.example.beerbud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO9vPxbEBgu70A-E5foAhILphjRTrhEl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
