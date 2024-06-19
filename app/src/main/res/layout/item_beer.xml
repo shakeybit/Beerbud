@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="beer"
+            type="com.example.beerbud.models.Beer" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/beerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name: @{beer.name}"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/beerBrewery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Brewery: @{beer.brewery}"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/beerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Style = @{beer.style}"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/beerAbv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABV: @{beer.abv}%"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</layout>
