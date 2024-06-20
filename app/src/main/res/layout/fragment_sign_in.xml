@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ProfileFragment">
+    tools:context=".SignInFragment">
 
     <data>
         <!-- Declare ViewModel and other data binding variables here if needed -->
@@ -13,18 +13,24 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/userEmailTextView"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="User Email"
-            android:textSize="18sp" />
+            android:hint="Email" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/signOutButton"
-            android:layout_width="wrap_content"
+            android:id="@+id/signInButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Out"
+            android:text="Sign In"
             android:layout_marginTop="16dp" />
     </LinearLayout>
 </layout>

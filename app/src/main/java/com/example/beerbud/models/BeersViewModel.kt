@@ -17,10 +17,19 @@ class BeersViewModel : ViewModel() {
     private val _filteredBeerData = MutableLiveData<List<Beer>>()
     val filteredBeerData: LiveData<List<Beer>> get() = _filteredBeerData
 
+    init {
+        fetchBeerData()
+    }
+
     fun fetchBeerData() {
         viewModelScope.launch {
-            val beers = repository.getBeers()
-            _beerData.postValue(beers)
+            try {
+                val beers = repository.getBeers()
+                _beerData.postValue(beers)
+                _filteredBeerData.postValue(beers) // Initialize filtered data
+            } catch (e: Exception) {
+                // Handle error
+            }
         }
     }
 
@@ -32,7 +41,7 @@ class BeersViewModel : ViewModel() {
     }
 
     fun sortBeersByAbv() {
-        _beerData.value?.let { beers ->
+        _filteredBeerData.value?.let { beers ->
             val sortedBeers = beers.sortedBy { it.abv }
             _filteredBeerData.postValue(sortedBeers)
         }

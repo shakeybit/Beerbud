@@ -10,40 +10,57 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/filterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filter"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sortButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5" />
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome back, user"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/sortButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sort"
-        app:layout_constraintTop_toBottomOf="@id/filterButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/recyclerView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5" />
+        <Button
+            android:id="@+id/beerListButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="List of Beers"
+            app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/favoriteBeersButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favorite Beers"
+            app:layout_constraintTop_toBottomOf="@id/beerListButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            app:layout_constraintTop_toBottomOf="@id/favoriteBeersButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/signOutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"
+            app:layout_constraintTop_toBottomOf="@id/profileButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

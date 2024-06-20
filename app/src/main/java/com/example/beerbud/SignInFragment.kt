@@ -1,16 +1,17 @@
 package com.example.beerbud
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.beerbud.databinding.FragmentRegisterBinding
+import com.example.beerbud.databinding.FragmentSignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class RegisterFragment : Fragment() {
+class SignInFragment : Fragment() {
 
-    private var _binding: FragmentRegisterBinding? = null
+    private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
@@ -19,7 +20,7 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,21 +29,17 @@ class RegisterFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        binding.registerButton.setOnClickListener {
+        binding.signInButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            auth.createUserWithEmailAndPassword(email, password)
+            auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                        findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
                     } else {
-                        // Handle error
+                        // handle err
                     }
                 }
-        }
-
-        binding.signInButton.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_signInFragment)
         }
     }
 

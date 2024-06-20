@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".RegisterFragment">
 
-    <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email" />
+    <data>
+        <!-- Declare ViewModel and other data binding variables here if needed -->
+    </data>
 
-    <EditText
-        android:id="@+id/passwordEditText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email" />
 
-    <Button
-        android:id="@+id/signinButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:layout_marginTop="8dp" />
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/signInButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign In"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</layout>

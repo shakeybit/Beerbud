@@ -5,21 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.beerbud.databinding.FragmentHomeBinding
-import com.example.beerbud.models.BeersAdapter
-import com.example.beerbud.models.BeersViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val beersViewModel: BeersViewModel by viewModels()
-
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,23 +27,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        beersViewModel.filteredBeerData.observe(viewLifecycleOwner, Observer { beers ->
-            // Update UI with filtered or sorted beer data
-            binding.recyclerView.adapter = BeersAdapter(beers) { beer ->
-                val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment(beer.id)
-                findNavController().navigate(action)
-            }
-        })
+        auth = FirebaseAuth.getInstance()
 
-        beersViewModel.fetchBeerData()
+        val user = auth.currentUser
+        binding.welcomeTextView.text = "Welcome back, ${user?.email}"
 
-        // Example of filtering and sorting
-        binding.filterButton.setOnClickListener {
-            beersViewModel.filterBeers("Pilsner") // Replace "Pilsner" with the filter criteria
+        binding.beerListButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_beerListFragment)
         }
 
-        binding.sortButton.setOnClickListener {
-            beersViewModel.sortBeersByAbv() // This will sort the beers by ABV
+        binding.favoriteBeersButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_favoriteBeersFragment)
+        }
+
+        binding.profileButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        }
+
+        binding.signOutButton.setOnClickListener {
+            auth.signOut()
+            findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
         }
     }
 

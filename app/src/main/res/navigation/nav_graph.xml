@@ -2,27 +2,64 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/registerFragment">
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.beerbud.RegisterFragment"
+        android:label="RegisterFragment">
+        <action
+            android:id="@+id/action_registerFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.beerbud.SignInFragment"
+        android:label="SignInFragment">
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.beerbud.HomeFragment"
         android:label="HomeFragment">
         <action
+            android:id="@+id/action_homeFragment_to_beerListFragment"
+            app:destination="@id/beerListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteBeersFragment"
+            app:destination="@id/favoriteBeersFragment" />
+        <action
             android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment">
-            <argument
-                android:name="beerId"
-                app:argType="integer" />
-        </action>
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/beerListFragment"
+        android:name="com.example.beerbud.BeerListFragment"
+        android:label="BeerListFragment" />
+
+    <fragment
+        android:id="@+id/favoriteBeersFragment"
+        android:name="com.example.beerbud.FavoriteBeersFragment"
+        android:label="FavoriteBeersFragment" />
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.beerbud.ProfileFragment"
         android:label="ProfileFragment">
-        <argument
-            android:name="beerId"
-            app:argType="integer" />
+        <action
+            android:id="@+id/action_profileFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
+
 </navigation>
