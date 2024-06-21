@@ -52,8 +52,8 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     implementation("com.google.firebase:firebase-core:21.1.1")
     implementation("com.google.firebase:firebase-database:21.0.0")
@@ -73,4 +73,7 @@ dependencies {
 
 
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
 }

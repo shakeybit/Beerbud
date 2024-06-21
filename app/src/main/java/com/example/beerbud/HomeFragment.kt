@@ -40,10 +40,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_favoriteBeersFragment)
         }
 
-        binding.profileButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
-        }
-
         binding.signOutButton.setOnClickListener {
             auth.signOut()
             findNavController().navigate(R.id.action_homeFragment_to_signInFragment)

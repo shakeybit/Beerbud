@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.beerbud.databinding.FragmentSignInBinding
@@ -29,18 +30,53 @@ class SignInFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        binding.signInButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-                    } else {
-                        // handle err
+        binding.registerButton.setOnClickListener {
+            val email = binding.emailEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
+
+            if (validateInput(email, password)) {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                        } else {
+                            Toast.makeText(requireContext(), "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+            }
         }
+
+        binding.signInButton.setOnClickListener {
+            val email = binding.emailEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
+
+            if (validateInput(email, password)) {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                        } else {
+                            Toast.makeText(requireContext(), "Sign in failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
+        }
+    }
+
+    private fun validateInput(email: String, password: String): Boolean {
+        var isValid = true
+
+        if (email.isEmpty()) {
+            binding.emailEditText.error = "Email is required"
+            isValid = false
+        }
+
+        if (password.isEmpty()) {
+            binding.passwordEditText.error = "Password is required"
+            isValid = false
+        }
+
+        return isValid
     }
 
     override fun onDestroyView() {

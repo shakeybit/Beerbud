@@ -7,7 +7,7 @@ data class Beer(
     val name: String,
     val style: String,
     val abv: Double,
-    val volume: Int,
+    val volume: Double,
     val pictureUrl: String,
     val howMany: Int
 )

@@ -1,5 +1,6 @@
 package com.example.beerbud.models
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,9 +15,6 @@ class BeersViewModel : ViewModel() {
     private val _beerData = MutableLiveData<List<Beer>>()
     val beerData: LiveData<List<Beer>> get() = _beerData
 
-    private val _filteredBeerData = MutableLiveData<List<Beer>>()
-    val filteredBeerData: LiveData<List<Beer>> get() = _filteredBeerData
-
     init {
         fetchBeerData()
     }
@@ -26,24 +24,10 @@ class BeersViewModel : ViewModel() {
             try {
                 val beers = repository.getBeers()
                 _beerData.postValue(beers)
-                _filteredBeerData.postValue(beers) // Initialize filtered data
+                Log.d("BeersViewModel", "Fetched ${beers.size} beers")
             } catch (e: Exception) {
-                // Handle error
+                Log.e("BeersViewModel", "Error fetching beers", e)
             }
-        }
-    }
-
-    fun filterBeers(criteria: String) {
-        _beerData.value?.let { beers ->
-            val filteredBeers = beers.filter { it.name.contains(criteria, ignoreCase = true) }
-            _filteredBeerData.postValue(filteredBeers)
-        }
-    }
-
-    fun sortBeersByAbv() {
-        _filteredBeerData.value?.let { beers ->
-            val sortedBeers = beers.sortedBy { it.abv }
-            _filteredBeerData.postValue(sortedBeers)
         }
     }
 }

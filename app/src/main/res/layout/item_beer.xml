@@ -42,5 +42,18 @@
             android:text="ABV: @{beer.abv}%"
             android:textSize="14sp" />
 
+
+        <TextView
+            android:id="@+id/beerAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Antal: @{beer.howMany}%"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/addToFavoriteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Favorite" />
     </LinearLayout>
 </layout>
