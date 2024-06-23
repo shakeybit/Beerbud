@@ -45,7 +45,7 @@ class FavoriteBeersFragment : Fragment() {
                     // No add to favorite functionality here
                 }, { beer ->
                     removeFromFavorite(beer)
-                })
+                }, isFavoriteList = true) // Set the flag to true for favorite list
             } else {
                 // Handle empty or null data
             }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -13,8 +14,10 @@ import com.example.beerbud.databinding.FragmentBeerListBinding
 import com.example.beerbud.models.Beer
 import com.example.beerbud.models.BeersAdapter
 import com.example.beerbud.models.BeersViewModel
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+
 
 class BeerListFragment : Fragment() {
 
@@ -58,7 +61,13 @@ class BeerListFragment : Fragment() {
     private fun addToFavorite(beer: Beer) {
         val userId = auth.currentUser?.uid ?: return
         val ref = database.getReference("favorites").child(userId).child(beer.id.toString())
-        ref.setValue(beer)
+        ref.setValue(beer).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(context, "Added to Favorites!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Failed to add to Favorites", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {

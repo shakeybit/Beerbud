@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.beerbud.models.BeersViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/beerNameInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/beerBreweryInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Brewery"
+            app:layout_constraintTop_toBottomOf="@id/beerNameInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/beerStyleInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Style"
+            app:layout_constraintTop_toBottomOf="@id/beerBreweryInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/beerAbvInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="ABV"
+            android:inputType="numberDecimal"
+            app:layout_constraintTop_toBottomOf="@id/beerStyleInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/beerVolumeInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Volume"
+            android:inputType="numberDecimal"
+            app:layout_constraintTop_toBottomOf="@id/beerAbvInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/beerAmountInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Amount"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/beerVolumeInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/addBeerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Beer"
+            app:layout_constraintTop_toBottomOf="@id/beerAmountInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

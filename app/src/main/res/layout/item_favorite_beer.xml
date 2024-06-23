@@ -47,9 +47,9 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/addToFavoriteButton"
+            android:id="@+id/removeFromFavoriteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add To Favorite" />
+            android:text="Remove from Favorite" />
     </LinearLayout>
 </layout>
