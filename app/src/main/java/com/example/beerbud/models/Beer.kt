@@ -1,7 +1,7 @@
 package com.example.beerbud.models
 
 data class Beer(
-    var id: Int,
+    val id: Int,
     val user: String,
     val brewery: String,
     val name: String,
