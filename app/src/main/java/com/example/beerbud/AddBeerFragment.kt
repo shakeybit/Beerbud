@@ -45,7 +45,7 @@ class AddBeerFragment : Fragment() {
                 val beer = Beer(id = 0, user = user, brewery = brewery, name = name, style = style, abv = abv, volume = volume, pictureUrl = null, howMany = amount)
                 beersViewModel.addBeer(beer)
                 Toast.makeText(context, "Beer added!", Toast.LENGTH_SHORT).show()
-                findNavController().navigateUp()
+                findNavController().navigateUp() // Navigate back to the previous fragment
             } else {
                 Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }

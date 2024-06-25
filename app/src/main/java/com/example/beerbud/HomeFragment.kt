@@ -46,12 +46,13 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_favoriteBeersFragment)
         }
 
+
         binding.signOutButton.setOnClickListener {
             auth.signOut()
             findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
         }
 
-        // Set up MenuProvider
+        // MenuProvider setup
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -70,6 +71,10 @@ class HomeFragment : Fragment() {
                     }
                     R.id.action_favorite_beers -> {
                         findNavController().navigate(R.id.favoriteBeersFragment)
+                        true
+                    }
+                    R.id.action_add_beer -> {
+                        findNavController().navigate(R.id.addBeerFragment)
                         true
                     }
                     R.id.action_sign_in -> {

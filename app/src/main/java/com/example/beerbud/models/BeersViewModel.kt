@@ -22,8 +22,8 @@ class BeersViewModel : ViewModel() {
     private val repository = BeersRepository()
 
     init {
-        fetchBeerData()
         fetchAndStoreBeers()
+        fetchBeerData()
     }
 
     private fun fetchAndStoreBeers() {
