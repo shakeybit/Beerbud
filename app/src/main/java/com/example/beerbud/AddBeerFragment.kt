@@ -13,6 +13,7 @@ import com.example.beerbud.models.Beer
 import com.example.beerbud.models.BeersViewModel
 import com.google.firebase.auth.FirebaseAuth
 
+
 class AddBeerFragment : Fragment() {
 
     private var _binding: FragmentAddBeerBinding? = null

@@ -22,11 +22,11 @@ class BeersViewModel : ViewModel() {
     private val repository = BeersRepository()
 
     init {
-        fetchAndStoreBeers()
+        fetchAndStoreApiBeers()
         fetchBeerData()
     }
 
-    private fun fetchAndStoreBeers() {
+    private fun fetchAndStoreApiBeers() {
         viewModelScope.launch {
             repository.fetchAndStoreBeers()
         }
@@ -35,15 +35,41 @@ class BeersViewModel : ViewModel() {
     fun fetchBeerData() {
         viewModelScope.launch {
             try {
-                val ref = database.getReference("beers")
-                ref.addValueEventListener(object : ValueEventListener {
+                val apiRef = database.getReference("apiBeers")
+                val userRef = database.getReference("userBeers")
+
+                val combinedBeers = mutableListOf<Beer>()
+
+                apiRef.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val beers = snapshot.children.mapNotNull { it.getValue(Beer::class.java) }
-                        _beerData.postValue(beers)
+                        combinedBeers.clear()
+                        for (beerSnapshot in snapshot.children) {
+                            val beer = beerSnapshot.getValue(Beer::class.java)
+                            if (beer != null) {
+                                combinedBeers.add(beer)
+                            }
+                        }
+
+                        // Fetch user-added beers after API beers
+                        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(userSnapshot: DataSnapshot) {
+                                for (beerSnapshot in userSnapshot.children) {
+                                    val beer = beerSnapshot.getValue(Beer::class.java)
+                                    if (beer != null) {
+                                        combinedBeers.add(beer)
+                                    }
+                                }
+                                _beerData.postValue(combinedBeers)
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.e("BeersViewModel", "Error fetching user beers", error.toException())
+                            }
+                        })
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        Log.e("BeersViewModel", "Error fetching beers", error.toException())
+                        Log.e("BeersViewModel", "Error fetching API beers", error.toException())
                     }
                 })
             } catch (e: Exception) {
@@ -53,7 +79,7 @@ class BeersViewModel : ViewModel() {
     }
 
     fun addBeer(beer: Beer) {
-        val ref = database.getReference("beers").push()
+        val ref = database.getReference("userBeers").push()
         beer.id = ref.key?.hashCode() ?: 0
         ref.setValue(beer).addOnCompleteListener { task ->
             if (task.isSuccessful) {

@@ -33,7 +33,7 @@ class BeersRepository {
         try {
             val beers = withContext(Dispatchers.IO) { api.getBeers() }
             val database = FirebaseDatabase.getInstance()
-            val ref = database.getReference("beers")
+            val ref = database.getReference("apiBeers")
 
             ref.setValue(beers).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
