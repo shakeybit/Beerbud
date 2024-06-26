@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beerbud.databinding.FragmentFavoriteBeersBinding
 import com.example.beerbud.models.Beer
 import com.example.beerbud.models.BeersAdapter
+import com.example.beerbud.models.FavoriteBeersAdapter
 import com.example.beerbud.models.FavoriteBeersViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-
 class FavoriteBeersFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBeersBinding? = null
@@ -39,19 +39,19 @@ class FavoriteBeersFragment : Fragment() {
 
         favoriteBeersViewModel.favoriteBeers.observe(viewLifecycleOwner, Observer { beers ->
             if (beers != null) {
-                binding.recyclerView.adapter = BeersAdapter(beers, { beer ->
-                    // Handle beer item click if necessary
-                }, { beer ->
-                    // Handle add to favorite if necessary, although it shouldn't be needed here
-                }, { beer ->
-                    // No delete functionality here
-                }, true) // Is a favorite list
+                binding.recyclerView.adapter = FavoriteBeersAdapter(beers) { beer ->
+                    removeFromFavorites(beer)
+                }
             } else {
                 // Handle empty or null data
             }
         })
 
         favoriteBeersViewModel.fetchFavoriteBeers()
+    }
+
+    private fun removeFromFavorites(beer: Beer) {
+        favoriteBeersViewModel.removeFromFavorites(beer)
     }
 
     override fun onDestroyView() {

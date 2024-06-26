@@ -33,4 +33,17 @@ class FavoriteBeersViewModel : ViewModel() {
             }
         })
     }
+
+    fun removeFromFavorites(beer: Beer) {
+        val userId = auth.currentUser?.uid ?: return
+        val ref = database.getReference("favorites").child(userId).child(beer.id.toString())
+
+        ref.removeValue().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                fetchFavoriteBeers() // Refresh favorite list after removal
+            } else {
+                Log.e("FavoriteBeersViewModel", "Error removing favorite: ${task.exception?.message}")
+            }
+        }
+    }
 }
