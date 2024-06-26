@@ -1,5 +1,6 @@
 package com.example.beerbud.models
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,31 +15,21 @@ class FavoriteBeersViewModel : ViewModel() {
     private val _favoriteBeers = MutableLiveData<List<Beer>>()
     val favoriteBeers: LiveData<List<Beer>> get() = _favoriteBeers
 
-    private val auth = FirebaseAuth.getInstance()
     private val database = FirebaseDatabase.getInstance()
+    private val auth = FirebaseAuth.getInstance()
 
-    init {
-        fetchFavoriteBeers()
-    }
-
-    private fun fetchFavoriteBeers() {
+    fun fetchFavoriteBeers() {
         val userId = auth.currentUser?.uid ?: return
         val ref = database.getReference("favorites").child(userId)
 
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val beers = mutableListOf<Beer>()
-                for (beerSnapshot in snapshot.children) {
-                    val beer = beerSnapshot.getValue(Beer::class.java)
-                    if (beer != null) {
-                        beers.add(beer)
-                    }
-                }
+                val beers = snapshot.children.mapNotNull { it.getValue(Beer::class.java) }
                 _favoriteBeers.postValue(beers)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle error
+                Log.e("FavoriteBeersViewModel", "Error fetching favorite beers", error.toException())
             }
         })
     }

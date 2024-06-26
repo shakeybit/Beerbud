@@ -50,6 +50,14 @@
             android:id="@+id/addToFavoriteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add To Favorite" />
+            android:text="Add to Favorite" />
+
+        <Button
+            android:id="@+id/deleteBeerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:visibility="gone" />
+
     </LinearLayout>
 </layout>

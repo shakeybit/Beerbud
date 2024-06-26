@@ -48,8 +48,8 @@ class BeerListFragment : Fragment() {
                 }, { beer ->
                     addToFavorite(beer)
                 }, { beer ->
-                    // No remove functionality here
-                })
+                    deleteBeer(beer)
+                }, false) // Not a favorite list
             } else {
                 // Handle empty or null data
             }
@@ -68,6 +68,10 @@ class BeerListFragment : Fragment() {
                 Toast.makeText(context, "Failed to add to Favorites", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun deleteBeer(beer: Beer) {
+        beersViewModel.deleteBeer(beer)
     }
 
     override fun onDestroyView() {

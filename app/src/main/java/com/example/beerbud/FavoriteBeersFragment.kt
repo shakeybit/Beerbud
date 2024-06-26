@@ -42,20 +42,16 @@ class FavoriteBeersFragment : Fragment() {
                 binding.recyclerView.adapter = BeersAdapter(beers, { beer ->
                     // Handle beer item click if necessary
                 }, { beer ->
-                    // No add to favorite functionality here
+                    // Handle add to favorite if necessary, although it shouldn't be needed here
                 }, { beer ->
-                    removeFromFavorite(beer)
-                }, isFavoriteList = true) // Set the flag to true for favorite list
+                    // No delete functionality here
+                }, true) // Is a favorite list
             } else {
                 // Handle empty or null data
             }
         })
-    }
 
-    private fun removeFromFavorite(beer: Beer) {
-        val userId = auth.currentUser?.uid ?: return
-        val ref = database.getReference("favorites").child(userId).child(beer.id.toString())
-        ref.removeValue()
+        favoriteBeersViewModel.fetchFavoriteBeers()
     }
 
     override fun onDestroyView() {

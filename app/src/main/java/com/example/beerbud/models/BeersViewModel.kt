@@ -89,4 +89,25 @@ class BeersViewModel : ViewModel() {
             }
         }
     }
+
+    fun deleteBeer(beer: Beer) {
+        val ref = database.getReference("userBeers").orderByChild("id").equalTo(beer.id.toDouble())
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (beerSnapshot in snapshot.children) {
+                    beerSnapshot.ref.removeValue().addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            fetchBeerData() // Refresh beer list after deletion
+                        } else {
+                            Log.e("BeersViewModel", "Error deleting beer: ${task.exception?.message}")
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("BeersViewModel", "Error deleting beer", error.toException())
+            }
+        })
+    }
 }
