@@ -1,0 +1,19 @@
+<resources>
+    <string-array name="sort_options">
+        <item>Name</item>
+        <item>Brewery</item>
+        <item>Style</item>
+        <item>ABV</item>
+        <item>Volume</item>
+        <item>Amount</item>
+    </string-array>
+
+    <string-array name="filter_options">
+        <item>Name</item>
+        <item>Brewery</item>
+        <item>Style</item>
+        <item>ABV</item>
+        <item>Volume</item>
+        <item>Amount</item>
+    </string-array>
+</resources>

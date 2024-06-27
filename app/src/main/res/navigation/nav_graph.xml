@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.beerbud.HomeFragment"
-        android:label="BEER BUD">
+        android:label="HOME">
         <action
             android:id="@+id/action_homeFragment_to_beerListFragment"
             app:destination="@id/beerListFragment" />
@@ -34,15 +34,16 @@
     <fragment
         android:id="@+id/beerListFragment"
         android:name="com.example.beerbud.BeerListFragment"
-        android:label="Beer List" />
+        android:label="BEERS" />
 
     <fragment
         android:id="@+id/favoriteBeersFragment"
         android:name="com.example.beerbud.FavoriteBeersFragment"
-        android:label="Favorite Beers" />
+        android:label="FAVORITES" />
 
     <fragment
         android:id="@+id/addBeerFragment"
         android:name="com.example.beerbud.AddBeerFragment"
+        android:label="Add Beer"
         tools:layout="@layout/fragment_add_beer" />
 </navigation>

@@ -2,9 +2,12 @@ package com.example.beerbud
 
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,7 +44,7 @@ class BeerListFragment : Fragment() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        beersViewModel.beerData.observe(viewLifecycleOwner, Observer { beers ->
+        beersViewModel.filteredBeerData.observe(viewLifecycleOwner, Observer { beers ->
             if (beers != null) {
                 binding.recyclerView.adapter = BeersAdapter(beers, { beer ->
                     // Handle beer item click if necessary
@@ -56,6 +59,44 @@ class BeerListFragment : Fragment() {
         })
 
         beersViewModel.fetchBeerData()
+
+        binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val sortOption = parent.getItemAtPosition(position).toString()
+                beersViewModel.sortBeers(sortOption)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
+
+        binding.filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val filterOption = parent.getItemAtPosition(position).toString()
+                // Set the hint of filter input based on the selected option
+                binding.filterInput.hint = "Enter $filterOption"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
+
+        binding.filterInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val filterOption = binding.filterSpinner.selectedItem.toString()
+                beersViewModel.filterBeers(filterOption, s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
+        })
     }
 
     private fun addToFavorite(beer: Beer) {

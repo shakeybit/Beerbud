@@ -18,6 +18,9 @@ class BeersViewModel : ViewModel() {
     private val _beerData = MutableLiveData<List<Beer>>()
     val beerData: LiveData<List<Beer>> get() = _beerData
 
+    private val _filteredBeerData = MutableLiveData<List<Beer>>()
+    val filteredBeerData: LiveData<List<Beer>> get() = _filteredBeerData
+
     private val database = FirebaseDatabase.getInstance()
     private val repository = BeersRepository()
 
@@ -60,6 +63,7 @@ class BeersViewModel : ViewModel() {
                                     }
                                 }
                                 _beerData.postValue(combinedBeers)
+                                _filteredBeerData.postValue(combinedBeers)
                             }
 
                             override fun onCancelled(error: DatabaseError) {
@@ -109,5 +113,35 @@ class BeersViewModel : ViewModel() {
                 Log.e("BeersViewModel", "Error deleting beer", error.toException())
             }
         })
+    }
+
+    fun sortBeers(sortOption: String) {
+        _filteredBeerData.value?.let { beers ->
+            val sortedBeers = when (sortOption) {
+                "Name" -> beers.sortedBy { it.name }
+                "Brewery" -> beers.sortedBy { it.brewery }
+                "Style" -> beers.sortedBy { it.style }
+                "ABV" -> beers.sortedBy { it.abv }
+                "Volume" -> beers.sortedBy { it.volume }
+                "Amount" -> beers.sortedBy { it.howMany }
+                else -> beers
+            }
+            _filteredBeerData.postValue(sortedBeers)
+        }
+    }
+
+    fun filterBeers(filterOption: String, filterValue: String) {
+        _beerData.value?.let { beers ->
+            val filteredBeers = when (filterOption) {
+                "Name" -> beers.filter { it.name.contains(filterValue, ignoreCase = true) }
+                "Brewery" -> beers.filter { it.brewery.contains(filterValue, ignoreCase = true) }
+                "Style" -> beers.filter { it.style.contains(filterValue, ignoreCase = true) }
+                "ABV" -> beers.filter { it.abv.toString().contains(filterValue, ignoreCase = true) }
+                "Volume" -> beers.filter { it.volume.toString().contains(filterValue, ignoreCase = true) }
+                "Amount" -> beers.filter { it.howMany.toString().contains(filterValue, ignoreCase = true) }
+                else -> beers
+            }
+            _filteredBeerData.postValue(filteredBeers)
+        }
     }
 }
