@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beerbud.databinding.ItemBeerBinding
-import com.example.beerbud.databinding.ItemFavoriteBeerBinding
+
 
 class BeersAdapter(
     private val beers: List<Beer>,
     private val onClick: (Beer) -> Unit,
     private val onFavoriteClick: (Beer) -> Unit,
-    private val onDeleteClick: (Beer) -> Unit, // New parameter for delete action
-    private val isFavoriteList: Boolean // New parameter to differentiate lists
+    private val onDeleteClick: (Beer) -> Unit,
+    private val isFavoriteList: Boolean
 ) : RecyclerView.Adapter<BeersAdapter.BeerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerViewHolder {
@@ -36,7 +36,6 @@ class BeersAdapter(
                 root.setOnClickListener { onClick(beer) }
                 addToFavoriteButton.setOnClickListener { onFavoriteClick(beer) }
 
-                // Show delete button only for user-added beers if not in favorite list
                 if (!isFavoriteList && beer.user.isNotEmpty()) {
                     deleteBeerButton.visibility = View.VISIBLE
                     deleteBeerButton.setOnClickListener { onDeleteClick(beer) }
@@ -44,7 +43,6 @@ class BeersAdapter(
                     deleteBeerButton.visibility = View.GONE
                 }
 
-                // Hide the add to favorite button if it's a favorite list
                 addToFavoriteButton.visibility = if (isFavoriteList) View.GONE else View.VISIBLE
 
                 executePendingBindings()

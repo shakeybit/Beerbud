@@ -13,6 +13,6 @@ data class Beer(
     @SerializedName("pictureUrl") val pictureUrl: String? = null,
     @SerializedName("howMany") val howMany: Int = 0
 ) {
-    // No-argument constructor for Firebase
+    // no-argument constructor for Firebase
     constructor() : this(0, "", "", "", "", 0.0, 0.0, null, 0)
 }

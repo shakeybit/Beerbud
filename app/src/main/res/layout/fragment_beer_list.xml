@@ -4,10 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".BeerListFragment">
 
-    <data>
-        <!-- Declare ViewModel and other data binding variables here if needed -->
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

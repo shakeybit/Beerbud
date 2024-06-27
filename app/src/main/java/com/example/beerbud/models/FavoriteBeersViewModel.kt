@@ -40,7 +40,7 @@ class FavoriteBeersViewModel : ViewModel() {
 
         ref.removeValue().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                fetchFavoriteBeers() // Refresh favorite list after removal
+                fetchFavoriteBeers()
             } else {
                 Log.e("FavoriteBeersViewModel", "Error removing favorite: ${task.exception?.message}")
             }

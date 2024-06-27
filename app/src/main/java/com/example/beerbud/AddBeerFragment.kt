@@ -11,12 +11,10 @@ import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.beerbud.databinding.FragmentAddBeerBinding
 import com.example.beerbud.models.Beer
-import com.example.beerbud.models.BeersViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -61,7 +59,10 @@ class AddBeerFragment : Fragment() {
                         findNavController().navigate(R.id.favoriteBeersFragment)
                         true
                     }
-
+                    R.id.action_add_beer -> {
+                        findNavController().navigate(R.id.addBeerFragment)
+                        true
+                    }
                     R.id.action_sign_in -> {
                         findNavController().navigate(R.id.signInFragment)
                         true
@@ -84,7 +85,7 @@ class AddBeerFragment : Fragment() {
                 val beer = Beer(0, user, brewery, name, style, abv, volume, "", howMany)
                 addBeer(beer)
             } else {
-                // Show error message
+                Toast.makeText(context, "Please fill in all fields correctly", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -94,9 +95,10 @@ class AddBeerFragment : Fragment() {
         beer.id = ref.key?.hashCode() ?: 0
         ref.setValue(beer).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                // Navigate back to beer list or show success message
+                Toast.makeText(context, "Beer added successfully", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.beerListFragment)
             } else {
-                // Show error message
+                Toast.makeText(context, "Error adding beer: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

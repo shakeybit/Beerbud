@@ -17,7 +17,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beerbud.databinding.FragmentFavoriteBeersBinding
 import com.example.beerbud.models.Beer
-import com.example.beerbud.models.BeersAdapter
 import com.example.beerbud.models.FavoriteBeersAdapter
 import com.example.beerbud.models.FavoriteBeersViewModel
 import com.google.firebase.auth.FirebaseAuth

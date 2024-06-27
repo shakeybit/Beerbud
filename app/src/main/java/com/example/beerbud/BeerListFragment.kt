@@ -88,14 +88,14 @@ class BeerListFragment : Fragment() {
         beersViewModel.filteredBeerData.observe(viewLifecycleOwner, Observer { beers ->
             if (beers != null) {
                 binding.recyclerView.adapter = BeersAdapter(beers, { beer ->
-                    // Handle beer item click if necessary
+                    // beer item click
                 }, { beer ->
                     addToFavorite(beer)
                 }, { beer ->
                     deleteBeer(beer)
-                }, false) // Not a favorite list
+                }, false)
             } else {
-                // Handle empty or null data
+                // empty or null data
             }
         })
 
@@ -108,19 +108,16 @@ class BeerListFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
             }
         }
 
         binding.filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val filterOption = parent.getItemAtPosition(position).toString()
-                // Set the hint of filter input based on the selected option
                 binding.filterInput.hint = "Enter $filterOption"
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
             }
         }
 

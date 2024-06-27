@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SignInFragment">
 
-    <data>
-        <!-- Declare ViewModel and other data binding variables here if needed -->
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -53,7 +53,7 @@ class BeersViewModel : ViewModel() {
                             }
                         }
 
-                        // Fetch user-added beers after API beers
+                        // fetch user beers after API beers
                         userRef.addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(userSnapshot: DataSnapshot) {
                                 for (beerSnapshot in userSnapshot.children) {
@@ -87,7 +87,7 @@ class BeersViewModel : ViewModel() {
         beer.id = ref.key?.hashCode() ?: 0
         ref.setValue(beer).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                fetchBeerData() // Refresh beer list after adding a new beer
+                fetchBeerData()
             } else {
                 Log.e("BeersViewModel", "Error adding beer: ${task.exception?.message}")
             }
@@ -101,7 +101,7 @@ class BeersViewModel : ViewModel() {
                 for (beerSnapshot in snapshot.children) {
                     beerSnapshot.ref.removeValue().addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            fetchBeerData() // Refresh beer list after deletion
+                            fetchBeerData()
                         } else {
                             Log.e("BeersViewModel", "Error deleting beer: ${task.exception?.message}")
                         }

@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".HomeFragment">
 
-    <data>
-        <!-- Declare ViewModel and other data binding variables here if needed -->
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,53 +11,44 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/welcomeTextView"
+            android:id="@+id/welcomeMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Welcome back, user"
             android:textSize="24sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonBeerList" />
 
         <Button
-            android:id="@+id/beerListButton"
+            android:id="@+id/buttonBeerList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="List of Beers"
-            app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
+            android:text="Beer List"
+            app:layout_constraintTop_toBottomOf="@id/welcomeMessage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginBottom="32dp" />
 
         <Button
-            android:id="@+id/favoriteBeersButton"
+            android:id="@+id/buttonFavoriteBeers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favorite Beers"
-            app:layout_constraintTop_toBottomOf="@id/beerListButton"
+            app:layout_constraintTop_toBottomOf="@id/buttonBeerList"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginBottom="32dp" />
 
         <Button
-            android:id="@+id/addBeerButton"
+            android:id="@+id/buttonAddBeer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add New Beer"
-            app:layout_constraintTop_toBottomOf="@id/favoriteBeersButton"
+            android:text="Add Beer"
+            app:layout_constraintTop_toBottomOf="@id/buttonFavoriteBeers"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
-
-        <Button
-            android:id="@+id/signOutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign Out"
-            app:layout_constraintTop_toBottomOf="@id/addBeerButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

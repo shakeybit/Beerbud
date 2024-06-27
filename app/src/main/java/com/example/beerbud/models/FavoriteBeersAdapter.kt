@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beerbud.databinding.ItemFavoriteBeerBinding
-import com.example.beerbud.models.Beer
+
 
 class FavoriteBeersAdapter(
     private val beers: List<Beer>,
