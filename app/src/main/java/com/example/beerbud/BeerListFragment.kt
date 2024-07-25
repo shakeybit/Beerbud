@@ -87,7 +87,8 @@ class BeerListFragment : Fragment() {
 
         beersViewModel.filteredBeerData.observe(viewLifecycleOwner, Observer { beers ->
             if (beers != null) {
-                binding.recyclerView.adapter = BeersAdapter(beers, { beer ->
+                binding.recyclerView.adapter = BeersAdapter(beers, {
+                    beer ->
                     // beer item click
                 }, { beer ->
                     addToFavorite(beer)
@@ -96,6 +97,7 @@ class BeerListFragment : Fragment() {
                 }, false)
             } else {
                 // empty or null data
+                Toast.makeText(context, "No data found for beer", Toast.LENGTH_SHORT).show()
             }
         })
 

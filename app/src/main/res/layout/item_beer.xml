@@ -40,6 +40,12 @@
             android:text='@{"ABV: " + beer.abv + "%"}' />
 
         <TextView
+            android:id="@+id/beerVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"Volume: " + beer.volume}' />
+
+        <TextView
             android:id="@+id/beerAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

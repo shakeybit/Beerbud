@@ -85,7 +85,7 @@ class AddBeerFragment : Fragment() {
                 val beer = Beer(0, user, brewery, name, style, abv, volume, "", howMany)
                 addBeer(beer)
             } else {
-                Toast.makeText(context, "Please fill in all fields correctly", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Fill in all fields correctly", Toast.LENGTH_SHORT).show()
             }
         }
     }
